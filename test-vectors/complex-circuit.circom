@@ -3,13 +3,13 @@ template ManyConstraints() {
     signal output c;
 
     signal b;
-    signal d;
 
     c <== a;
-    for (var i = 0; i < 10000; i++) {
-        c <== c * c;
-        b <== c * c;
-        d <== c * b;
+    signal d[10000];
+    d[0] <== b;
+    for (var i = 0; i < 10000-1; i++) {
+        b <== d[i] * d[i];
+        d[i+1] <== c * d[i];
     }
 }
 
